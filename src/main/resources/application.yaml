@@ -1,0 +1,20 @@
+server:
+  port: 3000  # C?ng c?a server s? ch?y
+  servlet:
+    context-path: /  # ???ng d?n g?c c?a ?ng d?ng, khi truy c?p s? là http://localhost:3000/
+
+spring:
+  devtools:
+    restart:
+      enabled: true  # Kích ho?t tính n?ng t? ??ng t?i l?i ?ng d?ng khi có thay ??i mã ngu?n
+  datasource:
+    url: jdbc:mysql://localhost:3306/ #{Thêm tên c?a database}  # ??a ch? c? s? d? li?u MySQL
+    username: root  # Tên ng??i dùng c? s? d? li?u
+    password: 123456  # M?t kh?u c?a ng??i dùng c? s? d? li?u
+    driver-class-name: com.mysql.cj.jdbc.Driver  # L?p trình ?i?u khi?n MySQL JDBC
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # Tùy ch?n ?? Hibernate t? ??ng c?p nh?t c? s? d? li?u
+      dialect: org.hibernate.dialect.MySQL5Dialect  # ??c t? dialect c?a MySQL5 cho Hibernate
+    show-sql: false  # Hi?n th? các câu l?nh SQL trong log khi ch?y ?ng d?ng
