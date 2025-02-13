@@ -1,21 +1,21 @@
 package App.model;
 
+import App.model.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-
-//Entity để ánh xạ đến database tạo bảng mà không cần vào thao tác với mysql
-//@Getter @Setter @NoArgsConstructor @AllArgsConstructor tự tạo getter, setter,constructor có tham số và không có tham số không cần phải viết thủ công
-//@UuidGenerator sẽ tự động tạo id ngẫu nhiên không trùng lặp,đây là kiểu dữ liệu bit16 giúp tối ưu hóa truy vấn query
-
+// Entity ánh xạ đến database
 @Entity
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
     @Id
     @UuidGenerator
@@ -25,7 +25,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     @NotBlank(message = "Password không được để trống")
     private String password;
 
@@ -35,6 +35,28 @@ public class User {
     private String email;
 
     @NotBlank(message = "Full name không được để trống")
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String fullname;
+
+    @Enumerated(EnumType.STRING) // Sử dụng Enum thay vì String
+    @Column(nullable = false)
+    private Role role;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
+
+    // Khi tạo user, tự động set thời gian tạo và role mặc định
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        if (role == null) {
+            role = Role.USER;
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore Maven / Gradle
+/target/
+/*.jar
+/*.war
+/.mvn/
+/.gradle/
+/out/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db

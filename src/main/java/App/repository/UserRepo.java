@@ -17,5 +17,5 @@ public interface UserRepo extends JpaRepository<User, UUID> {
     //SELECT * FROM User WHERE fullname = ? ->có thể nhiều người cùng tên nên dùng list
 
     List<User> findByFullname(String username);
-    Optional<User> findByUsername(String username);
+    Optional<User> findByUsernameOrEmail(String username,String password);
 }
