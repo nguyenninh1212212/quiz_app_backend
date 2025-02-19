@@ -1,7 +1,7 @@
-package App.service.User;
+package App.service;
 
 import App.dto.User.AuthRegDTO;
-import App.model.User;
+import App.model.entity.Users;
 import App.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +26,7 @@ public class UserServ {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepo.findAll();
     }
 
@@ -36,7 +36,7 @@ public class UserServ {
             if (req.getUsername().length() < 6) errors.add("Username must be at least 6 characters.");
             if (req.getPassword().length() < 6) errors.add("Password must be at least 6 characters.");
             String passwordHash = passwordEncoder.encode(req.getPassword());
-            User user = new User().builder().username(req.getUsername()).password(passwordHash).email(req.getEmail()).fullname(req.getFullName()).build();
+            Users user = new Users().builder().username(req.getUsername()).password(passwordHash).email(req.getEmail()).fullname(req.getFullName()).build();
             userRepo.save(user);
             return "Đăng ký thành công!!";
         } catch (Exception e) {

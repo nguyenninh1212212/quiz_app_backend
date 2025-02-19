@@ -1,8 +1,7 @@
 package App.controller.User;
 
 import App.dto.User.AuthRegDTO;
-import App.model.User;
-import App.service.User.UserServ;
+import App.service.UserServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

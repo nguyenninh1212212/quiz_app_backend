@@ -1,20 +1,21 @@
 server:
-  port: 3000  # C?ng c?a server s? ch?y
+  port: 3000  # Cổng của server chạy
   servlet:
-    context-path: /  # ???ng d?n g?c c?a ?ng d?ng, khi truy c?p s? l� http://localhost:3000/
+    context-path: "/"  # Đường dẫn gốc của ứng dụng, truy cập tại http://localhost:3000/
 
 spring:
   devtools:
     restart:
-      enabled: true  # K�ch ho?t t�nh n?ng t? ??ng t?i l?i ?ng d?ng khi c� thay ??i m� ngu?n
+      enabled: true  # Bật tính năng hot reload khi code thay đổi
+
   datasource:
-    url: jdbc:mysql://localhost:3306/ #{Th�m t�n c?a database}  # ??a ch? c? s? d? li?u MySQL
-    username: root  # T�n ng??i d�ng c? s? d? li?u
-    password: 123456  # M?t kh?u c?a ng??i d�ng c? s? d? li?u
-    driver-class-name: com.mysql.cj.jdbc.Driver  # L?p tr�nh ?i?u khi?n MySQL JDBC
+    url: jdbc:mysql://localhost:3306/Quiz  # Thêm tên của database "Quiz"
+    username: root  # Tài khoản MySQL
+    password: 123456  # Mật khẩu MySQL
+    driver-class-name: com.mysql.cj.jdbc.Driver  # Driver JDBC cho MySQL
 
   jpa:
     hibernate:
-      ddl-auto: update  # T�y ch?n ?? Hibernate t? ??ng c?p nh?t c? s? d? li?u
-      dialect: org.hibernate.dialect.MySQL5Dialect  # ??c t? dialect c?a MySQL5 cho Hibernate
-    show-sql: false  # Hi?n th? c�c c�u l?nh SQL trong log khi ch?y ?ng d?ng
+      ddl-auto: update  # Tự động cập nhật schema database
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # Chọn MySQL8Dialect cho Hibernate
+    show-sql: true  # Hiển thị câu lệnh SQL trong console

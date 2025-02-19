@@ -1,4 +1,4 @@
-package App.model;
+package App.model.entity;
 
 import App.model.enums.Role;
 import jakarta.persistence.*;
@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 // Entity ánh xạ đến database
@@ -16,7 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+
+public class Users {
     @Id
     @UuidGenerator
     private UUID id;
@@ -37,26 +39,16 @@ public class User {
     @NotBlank(message = "Full name không được để trống")
     @Column(nullable = false)
     private String fullname;
-
-    @Enumerated(EnumType.STRING) // Sử dụng Enum thay vì String
-    @Column(nullable = false)
-    private Role role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorite> favorites;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Folder> folders;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    // Khi tạo user, tự động set thời gian tạo và role mặc định
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        if (role == null) {
-            role = Role.USER;
-        }
-    }
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 }
