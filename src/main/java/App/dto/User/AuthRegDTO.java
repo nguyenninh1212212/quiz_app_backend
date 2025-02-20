@@ -1,6 +1,6 @@
 package App.dto.User;
 
-import App.model.entity.Users;
+import App.model.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class AuthRegDTO {
     private String email;
     private String fullName;
 
-    public AuthRegDTO(Users user) {
+    public AuthRegDTO(User user) {
         this.email = user.getEmail();
         this.fullName = user.getFullname();
         this.password = user.getPassword();

@@ -18,7 +18,7 @@ public class Notification {
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user;
+    private User user;
     private String content;
     private String sender;
     private LocalDateTime created;

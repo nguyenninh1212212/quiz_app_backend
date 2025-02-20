@@ -11,14 +11,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-// Entity ánh xạ đến database
 @Entity
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Users {
+public class User {
     @Id
     @UuidGenerator
     private UUID id;

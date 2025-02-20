@@ -18,7 +18,7 @@ public class Comment {
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
     @ManyToOne
     @JoinColumn(name = "exam_id", nullable = false)
     private Exam exam;

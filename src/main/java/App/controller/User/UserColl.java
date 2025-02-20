@@ -2,11 +2,10 @@ package App.controller.User;
 
 import App.dto.User.AuthLogDTO;
 import App.dto.User.AuthRegDTO;
-import App.model.entity.Users;
+import App.model.entity.User;
 import App.service.JwtService;
 import App.service.UserServ;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

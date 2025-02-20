@@ -20,9 +20,5 @@ public class Folder {
     private String name;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
-    @ManyToOne
-    @JoinColumn(name = "save_id", nullable = false)
-    private Save save;
-
+    private User user;
 }

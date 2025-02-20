@@ -1,7 +1,7 @@
 package App.service;
 
 import App.dto.User.AuthRegDTO;
-import App.model.entity.Users;
+import App.model.entity.User;
 import App.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +29,7 @@ public class UserServ implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<Users> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
@@ -39,7 +39,7 @@ public class UserServ implements UserDetailsService {
             if (req.getUsername().length() < 6) errors.add("Username must be at least 6 characters.");
             if (req.getPassword().length() < 6) errors.add("Password must be at least 6 characters.");
             String passwordHash = passwordEncoder.encode(req.getPassword());
-            Users user = new Users().builder().username(req.getUsername()).password(passwordHash).email(req.getEmail()).fullname(req.getFullName()).build();
+            User user = new User().builder().username(req.getUsername()).password(passwordHash).email(req.getEmail()).fullname(req.getFullName()).build();
             userRepo.save(user);
             return "Đăng ký thành công!!";
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class UserServ implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepo.findByUsername(username)
+        User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return org.springframework.security.core.userdetails.User

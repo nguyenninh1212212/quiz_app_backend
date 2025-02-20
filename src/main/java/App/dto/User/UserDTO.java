@@ -5,7 +5,7 @@ import App.dto.Folder.FolderDTO;
 import App.model.entity.Favorite;
 import App.model.entity.Folder;
 import App.model.entity.Notification;
-import App.model.entity.Users;
+import App.model.entity.User;
 import jakarta.persistence.Entity;
 import lombok.*;
 
@@ -24,7 +24,7 @@ public class UserDTO {
     private List<Notification> notifications;
     private LocalDateTime createdAt;
 
-    public UserDTO(Users user) {
+    public UserDTO(User user) {
         this.fullname = user.getFullname();
         this.favorites = new ArrayList<>();
         this.folders = new ArrayList<>();

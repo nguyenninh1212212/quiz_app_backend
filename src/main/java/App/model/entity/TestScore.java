@@ -10,17 +10,22 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor  // Thêm constructor mặc định
+@NoArgsConstructor
 @Builder
-public class Favorite {
+@Table(
+        name = "test_score",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "exam_id"})
+)
+public class TestScore {
     @Id
-    @GeneratedValue
     @UuidGenerator
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    private Double score;
 
     @ManyToOne
     @JoinColumn(name = "exam_id", nullable = false)

@@ -4,7 +4,7 @@ import App.dto.Exam.ExamDTO;
 import App.dto.PageReponse;
 import App.dto.User.UserDTO;
 import App.model.entity.Exam;
-import App.model.entity.Users;
+import App.model.entity.User;
 import App.repository.ExamRepo;
 import App.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ExamServ {
 
     public PageReponse<ExamDTO> getExams(String username, int page, int limit) {
         try {
-            Users user = userRepo.findByUsername(username)
+            User user = userRepo.findByUsername(username)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
             Pageable pageable = PageRequest.of(page, limit);

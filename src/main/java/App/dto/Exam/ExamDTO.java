@@ -2,11 +2,8 @@ package App.dto.Exam;
 
 import App.dto.User.UserDTO;
 import App.model.entity.Comment;
-import App.model.entity.Users;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+
 import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.List;
