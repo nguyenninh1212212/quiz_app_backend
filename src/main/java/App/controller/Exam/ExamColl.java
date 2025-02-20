@@ -1,6 +1,7 @@
 package App.controller.Exam;
 
 import App.dto.Exam.ExamDTO;
+import App.dto.PageReponse;
 import App.service.ExamServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,9 @@ public class ExamColl {
     private ExamServ examServ;
 
     @GetMapping("")
-    public ResponseEntity<?> getExams(@RequestParam(required = true) String username ) {
+    public ResponseEntity<?> getExams(@RequestParam(required = true) String username ,@RequestParam(required = true) int page,@RequestParam(required = true) int limit) {
             try {
-                List<ExamDTO> result = examServ.getExams(username);
+                PageReponse<ExamDTO> result = examServ.getExams(username,page,limit);
                 return  ResponseEntity.ok(Map.of("message","sucessfully","data",result));
             } catch (Exception e) {
                 throw new RuntimeException(e);

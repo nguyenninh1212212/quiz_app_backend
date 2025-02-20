@@ -2,6 +2,8 @@ package App.repository;
 
 import App.model.entity.Exam;
 import App.model.entity.Users;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +12,5 @@ import java.util.UUID;
 
 @Repository
 public interface ExamRepo extends JpaRepository<Exam, UUID> {
-    List<Exam> findAllByUser(Users user);
+    Page<Exam> findAllByUser(Users user, Pageable pageable);
 }
