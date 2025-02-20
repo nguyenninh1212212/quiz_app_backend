@@ -58,7 +58,7 @@ public class UserColl {
                 cookie.setMaxAge(7 * 24 * 60 * 60);
                 response.addCookie(cookie);
 
-                return ResponseEntity.ok(Map.of(
+                    return ResponseEntity.ok(Map.of(
                         "accessToken", accessToken,
                         "refreshToken", refreshToken
                 ));

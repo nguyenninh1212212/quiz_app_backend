@@ -23,7 +23,7 @@ public class ExamServ {
     public List<ExamDTO> getExams(String username) {
         try{
             Users user=userRepo.findByUsername(username).orElseThrow(()->new RuntimeException("User not found"));
-            List<ExamDTO> result=examRepo.findAllByUser(user).stream().map(exam ->ExamDTO.builder().owner(new UserDTO(exam.getOwner())).created(exam.getCreated()).docs(exam.getDocs()).comments(exam.getComments()).created(exam.getCreated()).build()).collect(Collectors.toList());
+            List<ExamDTO> result=examRepo.findAllByUser(user).stream().map(exam ->ExamDTO.builder().owner(new UserDTO(exam.getUser())).created(exam.getCreated()).docs(exam.getDocs()).comments(exam.getComments()).created(exam.getCreated()).build()).collect(Collectors.toList());
             return result;
 
         } catch (Exception e) {

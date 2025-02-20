@@ -4,6 +4,9 @@ import App.dto.User.AuthRegDTO;
 import App.model.entity.Users;
 import App.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ import java.util.List;
 
 //Xử lý nghiệp vụ, gọi repository để lấy dữ liệu
 @Service
-public class UserServ {
+public class UserServ implements UserDetailsService {
     //@Autowired dùng để tự động tiêm (inject) dependency vào các component mà không cần khởi tạo thủ công.
     private final UserRepo userRepo;
 
@@ -42,5 +45,15 @@ public class UserServ {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword())
+                .build();
     }
 }

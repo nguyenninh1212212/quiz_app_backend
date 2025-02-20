@@ -23,7 +23,7 @@ public class Exam {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonManagedReference
-    private Users owner;
+    private Users user;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")

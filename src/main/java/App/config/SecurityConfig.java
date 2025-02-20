@@ -1,5 +1,7 @@
 package App.config;
 
+import App.repository.UserRepo;
+import App.service.UserServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +25,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -57,10 +58,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authProvider() {
+    public UserDetailsService userDetailsService(UserRepo userRepo) {
+        return new UserServ(userRepo, passwordEncoder());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider(UserRepo userRepo) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(userDetailsService(userRepo));
         return provider;
     }
 
